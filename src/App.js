@@ -101,7 +101,15 @@ function MarkdownPreviewer() {
           event.preventDefault();
           handleRedo();
           break;
-        default:
+        case "KeyR":
+          event.preventDefault();
+          handleReset();
+          break;
+        case "KeyE":
+          event.preventDefault();
+          setMarkdown('');
+          break;    
+          default:
           break;
       }
     }
