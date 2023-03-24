@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import marked from 'marked';
+import hljs from "highlight.js";
 import './App.css';
 
 function MarkdownPreviewer() {
@@ -17,6 +18,7 @@ function MarkdownPreviewer() {
   // and then updates the `innerHTML` of the preview panel with the result
   marked.setOptions({
     renderer: new marked.Renderer(),
+    // Highlight JavaScript code
     highlight: function(code, lang) {
       const hljs = require('highlight.js');
       const language = hljs.getLanguage(lang) ? lang : 'plaintext';
@@ -25,16 +27,16 @@ function MarkdownPreviewer() {
     langPrefix: 'hljs language-',
     gfm: true,
     tables: true,
-    breaks: true,
+    breaks: true, // Make this 'true' to pass the last test
     pedantic: false,
     sanitize: false,
     smartLists: true,
     smartypants: false
   });
 
-  useEffect(() => {
-    document.getElementById('preview').innerHTML = marked(markdown);
-  }, [markdown]);
+  // useEffect(() => {
+  //   document.getElementById('preview').innerHTML = marked(markdown);
+  // }, [markdown]);
 
   return (
     <div className="markdown-previewer">
