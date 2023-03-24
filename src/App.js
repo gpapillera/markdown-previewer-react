@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import marked from 'marked';
 import hljs from "highlight.js";
@@ -6,6 +6,9 @@ import './App.css';
 
 function MarkdownPreviewer() {
   const [markdown, setMarkdown] = useState(defaultMarkdown);
+  const [history, setHistory] = useState([defaultMarkdown]);
+  const [currentStep, setCurrentStep] = useState(0);
+  const textareaRef = useRef(null);
 
   // This function is called whenever the user types something in the #editor/textarea
   
@@ -34,12 +37,82 @@ function MarkdownPreviewer() {
     smartypants: false
   });
 
-  // useEffect(() => {
-  //   document.getElementById('preview').innerHTML = marked(markdown);
-  // }, [markdown]);
+  useEffect(() => {
+    document.getElementById("preview").innerHTML = marked(markdown);
+    if (textareaRef.current) {
+      textareaRef.current.focus();
+    }
+  }, [markdown]);
+
+  // Handle undo function
+  function handleUndo() {
+    if (currentStep > 0) {
+      setCurrentStep(currentStep - 1);
+      setMarkdown(history[currentStep - 1]);
+    }
+  }
+
+  // Handle redo function
+  function handleRedo() {
+    if (currentStep < history.length - 1) {
+      setCurrentStep(currentStep + 1);
+      setMarkdown(history[currentStep + 1]);
+    }
+  }
+
+    // Handle reset function
+    function handleReset() {
+      setMarkdown(defaultMarkdown);
+      setHistory([defaultMarkdown]);
+      setCurrentStep(0);
+      textareaRef.current.focus();
+    }
+
+  // Handle change function in textarea
+  function handleChange(event) {
+    const { value } = event.target;
+    const lastWord = value.split(" ").pop();
+    const lastChar = value.charAt(value.length - 1);
+    const isLastCharSpace = /\s/g.test(lastChar);
+  
+    // Compare the last word of the old and new values
+    if (isLastCharSpace) {
+      setMarkdown(value);
+      setHistory([...history.slice(0, currentStep + 1), value]);
+      setCurrentStep(currentStep + 1);
+    } else if (lastWord === "undo") {
+      handleUndo();
+    } else if (lastWord === "redo") {
+      handleRedo();
+    } else {
+      setMarkdown(value);
+    }
+  }
+
+  // Handle key press events
+  function handleKeyPress(event) {
+    if (event.ctrlKey || event.metaKey) {
+      switch (event.code) {
+        case "KeyZ":
+          event.preventDefault();
+          handleUndo();
+          break;
+        case "KeyY":
+          event.preventDefault();
+          handleRedo();
+          break;
+        default:
+          break;
+      }
+    }
+  }
 
   return (
-    <div className="markdown-previewer">
+    <div
+      className="markdown-previewer"
+      onKeyDown={handleKeyPress}
+      tabIndex="0"
+      >
     
     <div className="container">
           {/* App Title */}  
@@ -50,7 +123,13 @@ function MarkdownPreviewer() {
               </p>
             </div>
           </div>
-
+          <div className="d-flex justify-content-between mb-2">
+              <button onClick={handleUndo} disabled={currentStep === 0}><i class="fas fa-undo"></i></button>
+              <button onClick={handleRedo} disabled={currentStep === history.length - 1}><i class="fas fa-redo"></i></button>
+              <button onClick={handleReset}><i class="fa fa-refresh" aria-hidden="true"></i></button>
+              <button onClick={() => setMarkdown('')}><i class="fa-solid fa-eraser"></i></button>
+            </div>
+          
           <div className="row mt-4">
             <div className="col-md-6">
             {/* Sub Title-1 */}
@@ -63,9 +142,9 @@ function MarkdownPreviewer() {
                 {/* <textarea id="editor" onChange={handleChange} value={markdown} /> ENABLE THIS IF YOU ENABLE THE onChange function */}
                 <textarea
                   id="editor"
-                  onChange={(event) => {
-                    setMarkdown(event.target.value);
-                    }} value={markdown}
+                  onChange={handleChange}
+                  value={markdown}
+                  ref={textareaRef}
                     />
             </div>
 
@@ -100,13 +179,13 @@ function MarkdownPreviewer() {
 
 // Default Markdown text
 const defaultMarkdown =
-`# My React Markdown Previewer!
+`# My Markdown Previewer!
 
-## This is a sub-heading...
+## H2 sub-heading...
 
-### And here's some other cool stuff:
+### H3 sub-heading
 
-Heres some code, \`\`\`<div></div>\`\`\`, between 2 backticks.
+Heres some code, \`<div></div>\`, between 2 backticks.
 
 \`\`\`
 // this is multi-line code:
@@ -124,23 +203,31 @@ Or... wait for it... **_both!_**
 And feel free to go crazy ~~crossing stuff out~~.
 
 There's also [links](https://www.freecodecamp.org), and
+
+
 > Block Quotes!
 
+
 And if you want to get really crazy, even tables:
+
 
 Wild Header | Crazy Header | Another Header?
 ------------ | ------------- | -------------
 Your content can | be here, and it | can be here....
 And here. | Okay. | I think we get it.
 
+
+
 - And of course there are lists.
   - Some are bulleted.
      - With different indentation levels.
         - That look like this.
 
+
 1. And there are numbered lists too.
 1. Use just 1s if you want!
 1. And last but not least, let's not forget embedded images:
+
 
 ![freeCodeCamp Logo](https://p.kindpng.com/picc/s/128-1280187_github-logo-png-github-transparent-png.png)
 `;
