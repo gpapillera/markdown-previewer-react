@@ -1,38 +1,100 @@
-.App {
-  text-align: center;
+
+@import url('https://fonts.googleapis.com/css2?family=Cutive+Mono&family=Golos+Text:wght@400;500;700&family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:ital,wght@0,200;0,300;0,400;0,500;0,700;0,800;1,400;1,500;1,600;1,700&display=swap');
+
+@import url('https://fonts.cdnfonts.com/css/sf-pro-display');
+@import url('https://fonts.cdnfonts.com/css/segoe-ui-4');
+
+@font-face {
+  font-family: 'Nixie One';
+  src: local('Nixie One'), url(./fonts/NixieOne.ttf) format('truetype');
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+@font-face {
+  font-family: 'Ubuntu Mono';
+  src: local('Ubuntu Mono'), url(./fonts/UbuntuMono-Regular.ttf) format('truetype');
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+@font-face {
+  font-family: 'Ubuntu Mono';
+  font-weight: 700;
+  src: local('Ubuntu Mono'), url(./fonts/UbuntuMono-Bold.ttf) format('truetype');
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+
+:root{
+  --Golos: 'Golos Text', sans-serif;
+  --Plus-jakarta: 'Plus Jakarta Sans', sans-serif;
+  --Inter: 'Inter', sans-serif;
+  --Cutive-mono: 'Cutive Mono', monospace;
+  --SF_Pro-font: 'SF Pro Display', sans-serif;
+  --Markdown-font: "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+  --Input-font1: 'Nixie One', sans-serif;
+  --Input-font2: 'Ubuntu Mono', sans-serif;
+
+
 }
 
-.App-link {
-  color: #61dafb;
+html {
+  box-sizing: border-box;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+body{
+  margin: 0;
+  background-color: #eff3f3;
+}
+
+*, *::before, *::after {
+  box-sizing: inherit;
+}
+
+.app-title{
+  font-family: var(--SF_Pro-font);
+  font-weight: 900;
+  font-size: 2.5rem;
+}
+
+.editor-title,
+.preview-title{
+  font-family: var(--Golos);
+  font-weight: 600;
+  font-size: 1.5rem;
+}
+
+h1,
+h2{
+  font-weight: bold;
+}
+
+#editor {
+  width: 100%;
+  max-width: 100%;
+  height: 65vh;
+  min-height: 400px;
+  max-height: 650px;
+  margin-bottom: 10px;
+  padding: 10px;
+  font-family: var(--Cutive-mono);
+  font-weight: bold;
+  font-size: 1rem;
+  border: 1.5px solid #ccc;
+  border-radius: 10px;
+}
+
+#preview {
+  width: 100%;
+  max-width: 100%;
+  height: 65vh;
+  min-height: 400px;
+  max-height: 650px;
+  padding: 10px;
+  font-family: var(--Plus-jakarta);
+  font-size: 16px;
+  border: 1.5px solid #ccc;
+  background-color: #eae6e6;
+  border-radius: 10px;
+  overflow: auto;
+}
+
+@media (min-width: 600px) {
+
 }
