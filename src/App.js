@@ -174,10 +174,11 @@ function MarkdownPreviewer() {
           </div>
           
           <div className="col text-center">
-              <p>
-                Coded by <a rel="noreferrer" target="_blank" href="https://github.com/gpapillera">gpapillera</a>
-              </p>
-            </div>
+            <p
+            className="footer">created by <i class="fa-brands fa-github fa-fade"></i> <a rel="noreferrer" target="_blank" href="https://github.com/gpapillera">gpapillera</a> | <i class="fa-brands fa-free-code-camp"></i> <a rel="noreferrer" target="_blank" href="https://www.freecodecamp.org/learn/front-end-development-libraries/#front-end-development-libraries-projects"> freeCodeCamp</a>
+            </p>
+              
+          </div>
 
       </div>
 

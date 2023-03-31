@@ -22,6 +22,11 @@
 
 
 :root{
+  --Inconsolata-font: 'Inconsolata', monospace;
+  --Montserrat-font: 'Montserrat', sans-serif;
+  --Poppins-font: 'Poppins', sans-serif;
+  --SpaceMono-font: 'Space Mono', monospace;
+  --ff-open-sans: 'Open Sans', sans-serif;
   --Golos: 'Golos Text', sans-serif;
   --Plus-jakarta: 'Plus Jakarta Sans', sans-serif;
   --Inter: 'Inter', sans-serif;
@@ -95,6 +100,18 @@ h2{
   overflow: auto;
 }
 
-@media (min-width: 600px) {
+/* Footer */
+.footer {
+  font-family: var(--Montserrat-font);
+  text-align: center;
+  margin-top: auto;
+}
+
+.footer a {
+  text-decoration: none;
+  color: var(--author-color);
+}
+
+@media (min-width: 40em) {
 
 }
