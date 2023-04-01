@@ -37,7 +37,7 @@
 
 ## Overview
 
-![screenshot](/Untitled.gif)
+![screenshot](./2023-04-01_15-28-47.gif)
 
 > This repository houses the project I worked on for [freeCodeCamp](https://www.freecodecamp.org/learn/front-end-development-libraries/front-end-development-libraries-projects/build-a-markdown-previewer). I hosted my example on [github-pages](https://github.com/gitname/react-gh-pages) Just click the "Demo" link [above](#top).
 
