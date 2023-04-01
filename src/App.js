@@ -63,8 +63,8 @@ function MarkdownPreviewer() {
     // Handle reset function
     function handleReset() {
       setMarkdown(defaultMarkdown);
-      setHistory([defaultMarkdown]);
-      setCurrentStep(0);
+      // setHistory([defaultMarkdown]);
+      //setCurrentStep(0);                // Enable this 2 lines of codes if you want to set UNDO & REDO to '0'
       textareaRef.current.focus();
     }
 
@@ -122,44 +122,44 @@ function MarkdownPreviewer() {
       tabIndex="0"
       >
     
-    <div className="container">
+    <div className="container-fluid">
           {/* App Title */}  
           <div className="row mt-4">
             <div className="col text-center">
-              <p className="app-title">
+              <p className="appTitle">
                   Markdown Previewer
-              </p>
+              </p>  
             </div>
           </div>
-          <div className="d-flex justify-content-between mb-2">
-              <button onClick={handleUndo} disabled={currentStep === 0}><i class="fas fa-undo"></i></button>
-              <button onClick={handleRedo} disabled={currentStep === history.length - 1}><i class="fas fa-redo"></i></button>
-              <button onClick={handleReset}><i class="fa fa-refresh" aria-hidden="true"></i></button>
-              <button onClick={() => setMarkdown('')}><i class="fa-solid fa-eraser"></i></button>
-            </div>
-          
-          <div className="row mt-4">
-            <div className="col-md-6">
-            {/* Sub Title-1 */}
+          <div className="col text-center">
+          <div className="d-inline-flex gap-2">
+              <button type="button" title="Ctrl+Z" onClick={handleUndo} disabled={currentStep === 0}><i class="fas fa-undo"></i> Undo</button>
+              <button type="button" title="Ctrl+Y" onClick={handleRedo} disabled={currentStep === history.length - 1}><i class="fas fa-redo"></i> Redo</button>
+              <button type="button" title="Ctrl+R" onClick={handleReset}><i class="fa fa-refresh" aria-hidden="true"></i> Reset</button>
+              <button type="button" title="Ctrl+E" onClick={() => setMarkdown('')}><i class="fa-solid fa-eraser"></i> Erase</button>
+          </div>
+          </div>
+          <div className="d-flex justify-content-center row mt-2">
+            <div className="col-lg-5 col-md-5">
               <div className="col text-center">
-                <h4 className="editor-title text-align-center">
+                <h4 className="editor-title">
                     Input
                 </h4>
               </div>
+
                {/* Textarea element that is bound to the `markdown` state */}
                 {/* <textarea id="editor" onChange={handleChange} value={markdown} /> ENABLE THIS IF YOU ENABLE THE onChange function */}
-                <textarea
+                <textarea 
                   id="editor"
                   onChange={handleChange}
                   value={markdown}
                   ref={textareaRef}
                     />
             </div>
-
-            <div className="col-md-6">
+            <div className="col-lg-5 col-md-5">
             {/* Sub Title-2 */}
               <div className="col text-center">
-                <h4 className="preview-title text-align-center">
+                <h4 className="preview-title">
                     Output
                 </h4>
               </div>
@@ -173,7 +173,7 @@ function MarkdownPreviewer() {
             </div>
           </div>
           
-          <div className="col text-center">
+          <div className="row mt-4 col text-center">
             <p
             className="footer">created by <i class="fa-brands fa-github fa-fade"></i> <a rel="noreferrer" target="_blank" href="https://github.com/gpapillera">gpapillera</a> | <i class="fa-brands fa-free-code-camp"></i> <a rel="noreferrer" target="_blank" href="https://www.freecodecamp.org/learn/front-end-development-libraries/#front-end-development-libraries-projects"> freeCodeCamp</a>
             </p>

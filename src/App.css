@@ -36,7 +36,8 @@
   --Input-font1: 'Nixie One', sans-serif;
   --Input-font2: 'Ubuntu Mono', sans-serif;
 
-
+  /* Color */
+  --title-color: #2c5363;
 }
 
 html {
@@ -45,29 +46,38 @@ html {
 
 body{
   margin: 0;
-  background-color: #eff3f3;
+  background-color: #edf2f7;
 }
 
 *, *::before, *::after {
   box-sizing: inherit;
 }
 
-.app-title{
-  font-family: var(--SF_Pro-font);
-  font-weight: 900;
-  font-size: 2.5rem;
+.col .appTitle{
+  font-family: var(--Poppins-font);
+  font-weight: 700;
+  font-size: 2.3rem;
+  word-spacing: .3em;
+  color: var(--title-color);
+}
+
+button {
+  font-family: var(--Montserrat-font);
+  color: var(--title-color);
+  border: none;
 }
 
 .editor-title,
 .preview-title{
   font-family: var(--Golos);
   font-weight: 600;
-  font-size: 1.5rem;
+  font-size: 1.7rem;
+  color: var(--title-color);
 }
 
 h1,
 h2{
-  font-weight: bold;
+  font-weight: 600;
 }
 
 #editor {
@@ -83,6 +93,8 @@ h2{
   font-size: 1rem;
   border: 1.5px solid #ccc;
   border-radius: 10px;
+  box-shadow:  3px 3px 10px #d0d0d0,
+              -7px -7px 12px #f0f0f078;
 }
 
 #preview {
@@ -98,6 +110,8 @@ h2{
   background-color: #eae6e6;
   border-radius: 10px;
   overflow: auto;
+  box-shadow:  3px 3px 10px #d0d0d0,
+              -7px -7px 12px #f0f0f078;
 }
 
 /* Footer */
